@@ -34,47 +34,13 @@ def predict(image):
         boxes = results[0].boxes
         confidences = boxes.conf.cpu().numpy()  # Dapatkan confidence setiap bounding box
         best_box_idx = confidences.argmax()  # Indeks bounding box dengan confidence tertinggi
-        best_box = boxes[best_box_idx]  # Ambil bounding box dengan confidence tertinggi
 
-        # Ambil koordinat dari bounding box terbaik
-        x1, y1, x2, y2 = best_box.xyxy.cpu().numpy()[0].astype(int)  # Koordinat bounding box
+        # Pilih bounding box dengan confidence tertinggi
+        best_result = results[0]
+        best_result.boxes = best_result.boxes[best_box_idx:best_box_idx+1]  # Hanya pilih bounding box tertinggi
 
-        # Ambil nama kelas dari prediksi (misalnya kelas 0, 1, 2, dst.)
-        class_id = int(best_box.cls.cpu().numpy()[0])
-        class_name = model.names[class_id]  # Ambil nama kelas dari YOLO model
-
-        # Ambil nilai confidence dari prediksi
-        confidence_score = confidences[best_box_idx]
-        confidence_text = f'{confidence_score:.2f}'  # Format nilai confidence jadi dua desimal
-
-        # Gabungkan nama kelas dan confidence
-        label = f'{class_name} {confidence_text}'
-
-        # Baca gambar input
-        img = cv2.imread(image_path)
-
-        # Gambarkan bounding box dengan confidence tertinggi di atas gambar
-        cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 2)  # Warna hijau untuk bounding box
-
-        # Tentukan ukuran teks dan posisi
-        font = cv2.FONT_HERSHEY_SIMPLEX
-        font_scale = 0.9
-        font_thickness = 2
-        text_size, _ = cv2.getTextSize(label, font, font_scale, font_thickness)
-        text_width, text_height = text_size
-
-        # Tentukan posisi kotak teks
-        text_offset_x = x1
-        text_offset_y = y1 - 10 if y1 - 10 > 10 else y1 + 10
-
-        # Buat kotak latar belakang untuk teks
-        box_coords = ((text_offset_x, text_offset_y - text_height - 5), (text_offset_x + text_width, text_offset_y))
-        cv2.rectangle(img, box_coords[0], box_coords[1], (0, 255, 0), cv2.FILLED)
-
-        # Tambahkan teks label (nama kelas + confidence) di dalam kotak
-        cv2.putText(img, label, (text_offset_x, text_offset_y - 5), font, font_scale, (0, 0, 0), font_thickness)
-
-        result_image_np = img
+        # Plot gambar dengan hanya bounding box tertinggi
+        result_image_np = best_result.plot()  # Menggunakan plot dari YOLO untuk hasil prediksi
     else:
         # Jika tidak ada bounding box, tampilkan gambar input tanpa bounding box
         result_image_np = cv2.imread(image_path)
