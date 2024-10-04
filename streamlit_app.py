@@ -8,7 +8,7 @@ import os
 import io
 
 # Load model YOLOv8
-model = YOLO('best.pt')
+model = YOLO('best19.pt')
 
 # Fungsi untuk membersihkan folder static
 def clear_static_folder():
