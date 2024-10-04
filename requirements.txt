@@ -1,1 +1,10 @@
 streamlit
+torch
+ultralytics==8.0.196
+flask
+tensorflow
+opencv-python
+numpy
+requests
+dill
+flask-ngrok
