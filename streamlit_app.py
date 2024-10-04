@@ -1,11 +1,11 @@
 import streamlit as st
+import streamlit as st
 from ultralytics import YOLO
 from PIL import Image
 import cv2
 import numpy as np
 import os
-from streamlit_webrtc import webrtc_streamer, VideoTransformerBase
-import av
+import io
 
 # Load model YOLOv8
 model = YOLO('best.pt')
@@ -50,19 +50,6 @@ def predict(image):
 
     return static_image_path
 
-# Fungsi untuk menangkap gambar dari kamera
-class VideoTransformer(VideoTransformerBase):
-    def __init__(self):
-        self.frame = None
-
-    def recv(self, frame):
-        self.frame = frame.to_ndarray(format="bgr24")  # Mengonversi frame ke format numpy array
-        return av.VideoFrame.from_ndarray(self.frame, format="bgr24")
-
-    def get_image(self):
-        if self.frame is not None:
-            return Image.fromarray(cv2.cvtColor(self.frame, cv2.COLOR_BGR2RGB))
-
 # Tampilan Streamlit
 st.title("Skin Cancer Detection")
 st.write(
@@ -78,13 +65,6 @@ st.write("Disclaimer!\n This model is a prototype for a college project and has 
 # Opsi untuk upload file
 uploaded_file = st.file_uploader("Upload an image", type=['png', 'jpg', 'jpeg'])
 
-# Opsi untuk menggunakan kamera
-st.write("Or use your camera to capture an image:")
-ctx = webrtc_streamer(key="example", video_transformer_factory=VideoTransformer)
-if ctx.video_transformer:
-    captured_image = ctx.video_transformer.get_image()
-
-# Prediksi gambar yang di-upload
 if uploaded_file is not None:
     # Menggunakan PIL untuk membuka gambar
     image = Image.open(uploaded_file)
@@ -93,37 +73,11 @@ if uploaded_file is not None:
     st.image(image, caption="Uploaded Image", use_column_width=True)
 
     # Tombol untuk melakukan prediksi
-    if st.button("Predict Uploaded Image"):
+    if st.button("Predict"):
         clear_static_folder()
         
         # Panggil fungsi prediksi
         result_image_path = predict(image)
-
-        # Tampilkan hasil prediksi
-        st.image(result_image_path, caption="Predicted Image", use_column_width=True)
-
-        # Tombol untuk menyimpan gambar
-        with open(result_image_path, "rb") as file:
-            btn = st.download_button(
-                label="Download Predicted Image",
-                data=file,
-                file_name="predicted_image.png",
-                mime="image/png"
-            )
-
-# Prediksi gambar dari kamera
-if ctx.video_transformer and captured_image is not None:
-    st.image(captured_image, caption="Captured Image", use_column_width=True)
-
-    if st.button("Predict Captured Image"):
-        clear_static_folder()
-        
-        # Simpan gambar yang ditangkap dari kamera
-        image_path = os.path.join('static', 'captured_image.png')
-        captured_image.save(image_path)
-
-        # Panggil fungsi prediksi
-        result_image_path = predict(captured_image)
 
         # Tampilkan hasil prediksi
         st.image(result_image_path, caption="Predicted Image", use_column_width=True)
