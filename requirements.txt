@@ -8,3 +8,4 @@ numpy
 requests
 dill
 flask-ngrok
+streamlit-webrtc
