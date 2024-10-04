@@ -1,6 +1,6 @@
 streamlit
 torch
-ultralytics==8.0.196
+ultralytics
 flask
 tensorflow
 opencv-python-headless
