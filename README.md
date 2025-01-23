@@ -1,19 +1,17 @@
-# 🎈 Blank app template
+# 🌷 Skin Cancer Detection
 
-A simple Streamlit app template for you to modify!
+A simple Streamlit app to detect skin cancer.
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://blank-app-template.streamlit.app/)
+[![Open the app](https://skin-cancer-detection-with-yolo.streamlit.app/)
 
-### How to run it on your own machine
+### How to try the skin cancer detection app
 
-1. Install the requirements
+1. Klik the button "Open the app" or copy this url on your browser https://skin-cancer-detection-with-yolo.streamlit.app/. If the app "sleeping", klik "waking up"
 
-   ```
-   $ pip install -r requirements.txt
-   ```
+2. Upload your skin lesion picture.
+example:
+![BCC](bcc.jpg)
 
-2. Run the app
+3. Klik "predict" and it will show the result like this
+![predcited](predicted.jpg)
 
-   ```
-   $ streamlit run streamlit_app.py
-   ```
