@@ -62,9 +62,9 @@ st.title("Skin Cancer Detection")
 st.write(
     """
     This is a deep learning model for detecting skin cancer.
-    This model can detect nine types of skin lesions:
+    This model can detect ten types of skin lesions:
     Actinic Keratosis, Basal Cell Carcinoma, Dermatofibra, Melanoma, Melanocytic Nevus, Pigmented Benign Keratosis,
-    Serborrheic Keratosis, Squamous Cell Carcinoma, and Vascular Lesion.
+    Serborrheic Keratosis, Squamous Cell Carcinoma, Solar Lentigo and Vascular Lesion.
     """
 )
 st.write("Disclaimer!\n This model is a prototype for a college project and has not been approved by any regulatory agencies.")
