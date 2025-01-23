@@ -87,7 +87,7 @@ if uploaded_file is not None:
         result_image_path = predict(image)
 
         # Tampilkan hasil prediksi
-        st.image(result_image_path, caption="Predicted Image", use_column_width=True)
+        st.image(result_image_path, caption="Predicted Image", use_container_width=True)
 
         # Tombol untuk menyimpan gambar
         with open(result_image_path, "rb") as file:
