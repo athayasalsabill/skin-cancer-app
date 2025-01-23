@@ -8,7 +8,7 @@ A simple Streamlit app to detect skin cancer.
 
 ### How to try the skin cancer detection app
 
-1. Klik the button "Open the app" or copy this URL on your browser: https://skin-cancer-detection-with-yolo.streamlit.app/. If the app is "sleeping", klik "waking up".
+1. Klik the button "Open the app" or copy this URL on your browser: https://skin-cancer-detection-with-yolo.streamlit.app/. If the app is "sleeping", klik "Yes, get this app back".
 
 2. Upload your skin lesion picture.  
    Example:  
