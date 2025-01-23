@@ -3,7 +3,7 @@
 A simple Streamlit app to detect skin cancer.
 
 <a href="https://skin-cancer-detection-with-yolo.streamlit.app/" target="_blank">
-  <img src="https://img.shields.io/badge/Open_the_App-Streamlit-blue?style=for-the-badge" alt="Open the App">
+  <img src="https://img.shields.io/badge/Open_the_App-Streamlit-pink?style=for-the-badge" alt="Open the App">
 </a>
 
 ### How to try the skin cancer detection app
